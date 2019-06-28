@@ -1,40 +1,39 @@
 
+class MyError(Exception):
+  pass
+        
+
+
 
 def calc(number1, number2, oper):
-  
-  if oper == '+':
-    print(number1 + number2)
+  try:
+    if oper == '+':
+      print(number1 + number2)
+    elif oper == '-':
+        if isinstance(number1, str) or isinstance(number2, str):
+          raise MyError('Вычитание строк запрещено')
+        else:
+          print(number1 - number2)
 
-  elif oper == '-':
-    try:
-      if isinstance(number1, str) or isinstance(number2, str):
-        raise Exception('Вычитание строк запрещено')
-      else:
-        print(number1 - number2)
-    except Exception as e:
-      print(e)
+    elif oper == '*':
+        if isinstance(number1, str) or isinstance(number2, str):
+          raise MyError('Умножение строк запрещено')
+        else:
+          print(number1 * number2)
 
-  elif oper == '*':
-    try:
-      if isinstance(number1, str) or isinstance(number2, str):
-        raise Exception('Умножение строк запрещено')
-      else:
-        print(number1 * number2)
-    except Exception as e:
-      print(e)
-    
-  elif oper == '/':
-    try:
-      if isinstance(number1, str) or isinstance(number2, str):
-        raise Exception('Деление строк запрещено')
-      else:
-        print(number1 / number2)
-    except ZeroDivisionError:
-      print('Деление на 0 запрещено')
-    except Exception as e:
-      print(e)
-  else:
-    print('Ошибка!!!Введены некоректно данные')
+    elif oper == '/':
+      try:
+        if isinstance(number1, str) or isinstance(number2, str):
+          raise MyError('Деление строк запрещено')
+        else:
+          print(number1 / number2)
+      except ZeroDivisionError:
+        print('Деление на 0 запрещено')
+    else:
+      print('Ошибка!!!Введены некоректно данные')
+      
+  except MyError as e:
+        print(e)
     
     
 try:
